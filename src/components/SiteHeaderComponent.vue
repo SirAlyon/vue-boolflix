@@ -30,8 +30,6 @@ export default {
       axios
         .get(this.link)
         .then((response) => {
-          //console.log(response.data.results);
-          console.log(this.films);
           state.loading = false
           state.films = response.data.results
           console.log(state.films, state.loading);
