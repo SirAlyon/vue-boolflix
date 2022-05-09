@@ -2,11 +2,20 @@
   <header>
     <input type="text" v-model="search" @keyup="getApiLink" />
     <button @click="getApi">Submit</button>
+    <!-- <div class="film" v-if="!loading">
+      <div class="film" v-for="(film, index) in films" :key="index">
+        <div class="title">{{ film.title }}</div>
+        <div class="original_title">{{ film.original_title }}</div>
+        <div class="lang">{{ film.original_language }}</div>
+        <div class="review">{{ film.vote_average }}</div>
+      </div>
+    </div> -->
   </header>
 </template>
 
 <script>
 import axios from "axios";
+import state from "@/state.js";
 
 export default {
   name: "SiteHeader",
@@ -14,6 +23,8 @@ export default {
     return {
       search: "",
       link: "",
+      loading: true,
+      films: null
     };
   },
   methods: {
@@ -21,7 +32,13 @@ export default {
       axios
         .get(this.link)
         .then((response) => {
-          console.log(response.data.results);
+          //console.log(response.data.results);
+          this.loading = false;
+          this.films = response.data.results;
+          console.log(this.films);
+          state.loading = false
+          state.films = this.films
+          console.log(state.films, state.loading);
         })
         .catch((error) => {
           console.log(error);
@@ -44,14 +61,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    header{
-        background-color: black;
-        padding: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        button{
-            margin-left: 2rem;
-        }
-    }
+header {
+  background-color: black;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  button {
+    margin-left: 2rem;
+  }
+  .film{
+      margin: 2rem 0;
+  }
+}
 </style>
