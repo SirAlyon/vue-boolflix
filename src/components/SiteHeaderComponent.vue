@@ -65,8 +65,5 @@ header {
   button {
     margin-left: 2rem;
   }
-  .film{
-      margin: 2rem 0;
-  }
 }
 </style>
