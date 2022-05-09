@@ -5,6 +5,7 @@ Vue.component('country-flag', CountryFlag)
 
 const state = Vue.observable({
     films: null,
+    series: null,
     loading: true
 })
 

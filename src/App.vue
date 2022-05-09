@@ -8,9 +8,14 @@
         <div class="original_title">{{ film.original_title }}</div>
         <div class="lang">
           {{ film.original_language }}
-          <country-flag :country="film.original_language === 'en' ? 'us' : ''" size='normal'/>
+          <country-flag :country="flags(film.original_language)" size='normal'/>
         </div>
         <div class="review">{{ film.vote_average }}</div>
+      </div>
+    </div>
+    <div class="series" v-for="(serie, index) in series" :key="index">
+      <div class="serie">
+        {{ serie.original_name }}
       </div>
     </div>
   </div>
@@ -35,7 +40,19 @@ export default {
     loading() {
       return state.loading;
     },
+    series(){
+      return state.series
+    }
   },
+  methods:{
+    flags(lang){
+      if (lang === 'en'){
+        return lang = 'us'
+      } else {
+        return lang
+      }
+    }
+  }
 };
 </script>
 
