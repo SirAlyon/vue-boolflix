@@ -23,8 +23,6 @@ export default {
     return {
       search: "",
       link: "",
-      loading: true,
-      films: null
     };
   },
   methods: {
@@ -33,11 +31,9 @@ export default {
         .get(this.link)
         .then((response) => {
           //console.log(response.data.results);
-          this.loading = false;
-          this.films = response.data.results;
           console.log(this.films);
           state.loading = false
-          state.films = this.films
+          state.films = response.data.results
           console.log(state.films, state.loading);
         })
         .catch((error) => {

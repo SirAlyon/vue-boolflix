@@ -1,8 +1,6 @@
 <template>
   <main>
-    <div class="main_top" 
-    v-if="!loading"
-    @hook:mounted="getData">
+    <div class="main_top">
         <div class="film" v-for="(film, index) in films" :key="index">
           <div class="title">{{ film.title }}</div>
           <div class="original_title">{{ film.original_title }}</div>
@@ -20,15 +18,12 @@ export default {
   name: "SiteMain",
   data(){
       return {
-          films: null,
-          loading: true,
+          films: state.films,
+          loading: state.loading,
       }
   },
   methods: {
-      getData(){
-          this.films = state.films
-          this.loading = state.loading
-      }
+      
   }
 };
 </script>
