@@ -6,16 +6,34 @@
       <div class="film" v-for="(film, index) in films" :key="index">
         <div class="title">{{ film.title }}</div>
         <div class="original_title">{{ film.original_title }}</div>
+        <img :src="getImage(film.backdrop_path)" alt=""/>
+
         <div class="lang">
           {{ film.original_language }}
-          <country-flag :country="flags(film.original_language)" size='normal'/>
+          <country-flag
+            :country="flags(film.original_language)"
+            size="normal"
+          />
         </div>
         <div class="review">{{ film.vote_average }}</div>
       </div>
     </div>
-    <div class="series" v-for="(serie, index) in series" :key="index">
-      <div class="serie">
-        {{ serie.original_name }}
+    <div class="series" v-if="!loading">
+      <div class="serie" v-for="(serie, index) in series" :key="index">
+        <div class="title">{{ serie.name }}</div>
+        <div class="original_title">{{ serie.original_name }}</div>
+        <img
+          :src="getImage(serie.backdrop_path)"
+          alt=""
+        />
+        <div class="lang">
+          {{ serie.original_language }}
+          <country-flag
+            :country="flags(serie.original_language)"
+            size="normal"
+          />
+        </div>
+        <div class="review">{{ serie.vote_average }}</div>
       </div>
     </div>
   </div>
@@ -40,19 +58,26 @@ export default {
     loading() {
       return state.loading;
     },
-    series(){
-      return state.series
-    }
+    series() {
+      return state.series;
+    },
   },
-  methods:{
-    flags(lang){
-      if (lang === 'en'){
-        return lang = 'us'
+  methods: {
+    flags(lang) {
+      if (lang === "en") {
+        return (lang = "us");
       } else {
-        return lang
+        return lang;
+      }
+    },
+    getImage(thumb){
+      if (thumb !== '' && thumb !== null){
+        return 'https://image.tmdb.org/t/p/w300/' + thumb
+      } else {
+        return 'https://picsum.photos/300/170'
       }
     }
-  }
+  },
 };
 </script>
 
@@ -69,12 +94,14 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-.films {
+.films,
+.series {
   display: flex;
-  .film {
+  .film,
+  .serie {
     padding: 1rem;
     border: 1px solid black;
-    .title{
+    .title {
       color: blue;
       margin-bottom: 2rem;
     }
