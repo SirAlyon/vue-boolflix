@@ -1,19 +1,29 @@
 <template>
   <div id="app">
     <SiteHeader />
-    <SiteMain />
-  </div>
+    <!-- <SiteMain /> -->
+      <div class="film" v-for="(film, index) in state.films" :key="index">
+        <div class="title">{{ film.title }}</div>
+        <div class="original_title">{{ film.original_title }}</div>
+        <div class="lang">{{ film.original_language }}</div>
+        <div class="review">{{ film.vote_average }}</div>
+      </div>
+    </div>
 </template>
 
 <script>
 import SiteHeader from '@/components/SiteHeaderComponent.vue'
-import SiteMain from '@/components/SiteMainComponent.vue'
+import state from "@/state.js";
+//import SiteMain from '@/components/SiteMainComponent.vue'
 
 export default {
   name: 'App',
   components: {
     SiteHeader,
-    SiteMain
+    //SiteMain
+  },
+  mounted(){
+    console.log(state);
   }
 }
 </script>

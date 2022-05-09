@@ -1,6 +1,6 @@
-import vue from 'vue'
+import Vue from 'vue'
 
-const state = vue.observable({
+const state = Vue.observable({
     films: null,
     loading: true
 })

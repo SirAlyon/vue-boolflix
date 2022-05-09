@@ -18,12 +18,13 @@ export default {
   name: "SiteMain",
   data(){
       return {
-          films: state.films,
-          loading: state.loading,
+          films: null,
+          loading: true,
       }
   },
-  methods: {
-      
-  }
+  mounted(){
+      console.log(state);
+  },
+
 };
 </script>
