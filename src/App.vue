@@ -87,7 +87,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 * {
@@ -112,10 +111,10 @@ img {
   .serie {
     border: 1px solid black;
     min-height: 350px;
+    width: 100%;
+    height: 100%;
+
     .title {
-      color: blue;
-      margin-bottom: 2rem;
-      height: 50px;
       overflow: hidden;
     }
     img {
@@ -130,6 +129,7 @@ img {
 }
 
 .infos {
+  padding: 1.5rem 0.5rem;
   background-color: black;
   width: 100%;
   height: 100%;
@@ -138,6 +138,8 @@ img {
   top: 0;
   left: 0;
   color: white;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 .col-2:hover .infos {
   display: block;
