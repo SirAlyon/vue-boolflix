@@ -1,15 +1,21 @@
 <template>
   <header>
-    <input type="text" v-model="search" @keyup="getApiLink" />
-    <button @click="getApi">Submit</button>
-    <!-- <div class="film" v-if="!loading">
-      <div class="film" v-for="(film, index) in films" :key="index">
-        <div class="title">{{ film.title }}</div>
-        <div class="original_title">{{ film.original_title }}</div>
-        <div class="lang">{{ film.original_language }}</div>
-        <div class="review">{{ film.vote_average }}</div>
-      </div>
-    </div> -->
+    <img src="@/assets/img/boolflix.png" alt="" />
+    <div class="d-flex align-items-center">
+      <input
+        type="text"
+        v-model="search"
+        @keyup="getApiLink"
+        @keyup.enter="getApi"
+      />
+
+      <font-awesome-icon
+        @click="getApi"
+        icon="fa-solid fa-magnifying-glass"
+        class="mx-2 fs-3"
+      />
+      <!-- <button @click="getApi">Submit</button> -->
+    </div>
   </header>
 </template>
 
@@ -48,7 +54,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-        console.log(state.series);
+      console.log(state.series);
     },
     getFilmLink() {
       if (this.search !== "") {
@@ -73,8 +79,10 @@ export default {
       }
     },
     getApiLink() {
-      this.getFilmLink();
-      this.getSerieLink();
+      if (this.search !== "") {
+        this.getFilmLink();
+        this.getSerieLink();
+      }
     },
   },
 };
@@ -83,10 +91,10 @@ export default {
 <style scoped lang="scss">
 header {
   background-color: black;
-  padding: 2rem;
+  padding: 2rem 5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   color: white;
   button {
     margin-left: 2rem;

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-2" v-if="!loading">
+  <div class="col-2" v-if="!loading" @hook:mounted="$emit(getCast)">
     <div class="serie position-relative">
       <img :src="image" alt="" />
       <div class="infos">
@@ -30,6 +30,10 @@
           <span class="fw-bold">Overview:</span> 
           {{serie.overview}}
         </div>
+        <div class="cast" v-if="cast !== []" :cast="cast"> 
+          <span>Actor:</span>
+          <span v-for="actor in cast" :key="actor">{{actor}}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -44,6 +48,7 @@ export default {
     image: String,
     language: String,
     vote: [Number, String],
+    cast: Array,
   },
 };
 </script>
