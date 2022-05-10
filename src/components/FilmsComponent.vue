@@ -46,6 +46,7 @@ export default {
     image: String,
     language: String,
     vote: [Number, String],
+    
   },
 };
 </script>

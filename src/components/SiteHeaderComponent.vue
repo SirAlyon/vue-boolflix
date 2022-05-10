@@ -50,6 +50,11 @@ export default {
           state.loading = false;
           state.series = response.data.results;
           console.log(state.series, state.loading);
+
+          // per ogni serie in series
+          // prendi il cast via axios
+          // aggiungi la risposta in serie.cast
+          
         })
         .catch((error) => {
           console.log(error);

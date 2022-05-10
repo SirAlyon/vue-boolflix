@@ -14,7 +14,6 @@
           :vote="getVote(film.vote_average)"
           v-for="(film, index) in films"
           :key="'film' + index"
-          
         />
         <h2>Serie TV:</h2>
         <Series
@@ -26,8 +25,8 @@
           :vote="getVote(serie.vote_average)"
           v-for="(serie, index) in series"
           :key="'serie' + index"
-          :getCast="getCast(serie.id)"
-          :cast="cast"
+          @hook:mounted="getCast(serie.id, 'tv/')"
+          :cast="cast[index]"
         />
       </div>
     </div>
@@ -62,9 +61,9 @@ export default {
     series() {
       return state.series;
     },
-    cast(){
-      return state.serieCast
-    }
+    cast() {
+      return state.serieCast;
+    },
   },
   methods: {
     flags(lang) {
@@ -84,19 +83,31 @@ export default {
     getVote(vote) {
       return Math.ceil(vote / 2);
     },
-    getCast(id){
-        axios
-        .get('https://api.themoviedb.org/3/tv/' + id + '/season/1/credits?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US')
+    getCast(id, movieType) {
+      axios
+        .get(
+          "https://api.themoviedb.org/3/" +
+            movieType +
+            id +
+            "/season/1/credits?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US"
+        )
         .then((response) => {
-          console.log(response.data.cast);
-          response.data.cast.forEach(actor => {
-            state.serieCast.push(actor.name)
+          //console.log(response.data.cast);
+          const array = [];
+          response.data.cast.forEach((actor) => {
+            if (!array.includes(actor.name) && array.length !== 5) {
+              array.push(actor.name);
+            }
           });
-          console.log(state.serieCast);
-          //console.log(state.serieCast);
+          //console.log(array);
+            state.serieCast.push(array);
+            console.log(state.serieCast);
         })
         .catch((error) => {
           console.log(error);
+          const emptyArray = []
+          state.serieCast.push(emptyArray)
+          console.log(state.serieCast);
         });
     },
   },
@@ -118,8 +129,8 @@ export default {
   box-sizing: border-box;
 }
 
-h2{
-  margin-top: 2rem!important;
+h2 {
+  margin-top: 2rem !important;
 }
 
 img {
