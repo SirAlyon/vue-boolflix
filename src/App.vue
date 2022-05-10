@@ -4,73 +4,28 @@
     <!-- <SiteMain /> -->
     <div class="container">
       <div class="row">
-        <!-- <div class="films" v-if="!loading">
-          <div class="col-2" v-for="(film, index) in films" :key="index">
-            <div class="film">
-              <div class="title">{{ film.title }}</div>
-              <div class="original_title">{{ film.original_title }}</div>
-              <img :src="getImage(film.backdrop_path)" alt="" />
-
-              <div class="lang">
-                {{ film.original_language }}
-                <country-flag
-                  :country="flags(film.original_language)"
-                  size="normal"
-                />
-              </div>
-              <div class="star">
-                <span class="voted"
-                  v-for="s in getVote(film.vote_average)"
-                  :key="'star-n' + s">
-                  <font-awesome-icon icon="fa-solid fa-star"/>
-                </span>
-
-                <span>
-                  <font-awesome-icon
-                    icon="fa-solid fa-star"
-                    v-for="s in 5 - getVote(film.vote_average)"
-                    :key="'star-n' + s"
-                  />
-                </span>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <h2>Films List:</h2>
-        <Films class="films" :film="film" :loading="loading" :image="getImage(film.backdrop_path)" :language="flags(film.original_language)" :vote="getVote(film.vote_average)" v-for="(film, index) in films" :key="'film' + index"/>
+        <Films
+          class="films"
+          :film="film"
+          :loading="loading"
+          :image="getImage(film.poster_path)"
+          :language="flags(film.original_language)"
+          :vote="getVote(film.vote_average)"
+          v-for="(film, index) in films"
+          :key="'film' + index"
+        />
         <h2>Series List:</h2>
-        <!-- <div class="series" v-if="!loading">
-          <div class="col-2" v-for="(serie, index) in series" :key="index">
-            <div class="serie">
-              <div class="title">{{ serie.name }}</div>
-              <div class="original_title">{{ serie.original_name }}</div>
-              <img :src="getImage(serie.backdrop_path)" alt="" />
-              <div class="lang">
-                {{ serie.original_language }}
-                <country-flag
-                  :country="flags(serie.original_language)"
-                  size="normal"
-                />
-              </div>
-              <div class="star">
-                <span class="voted"
-                  v-for="s in getVote(serie.vote_average)"
-                  :key="'star-n' + s">
-                  <font-awesome-icon icon="fa-solid fa-star"/>
-                </span>
-
-                <span>
-                  <font-awesome-icon
-                    icon="fa-solid fa-star"
-                    v-for="s in 5 - getVote(serie.vote_average)"
-                    :key="'star-n' + s"
-                  />
-                </span>
-              </div>
-            </div>
-          </div>
-        </div> -->
-         <Series class="series" :serie="serie" :loading="loading" :image="getImage(serie.backdrop_path)" :language="flags(serie.original_language)" :vote="getVote(serie.vote_average)" v-for="(serie, index) in series" :key="'serie' + index" />
+        <Series
+          class="series"
+          :serie="serie"
+          :loading="loading"
+          :image="getImage(serie.poster_path)"
+          :language="flags(serie.original_language)"
+          :vote="getVote(serie.vote_average)"
+          v-for="(serie, index) in series"
+          :key="'serie' + index"
+        />
       </div>
     </div>
   </div>
@@ -81,7 +36,6 @@ import SiteHeader from "@/components/SiteHeaderComponent.vue";
 import Films from "@/components/FilmsComponent.vue";
 import Series from "@/components/SeriesComponent.vue";
 
-
 import state from "@/state.js";
 
 //import SiteMain from '@/components/SiteMainComponent.vue'
@@ -91,7 +45,7 @@ export default {
   components: {
     SiteHeader,
     Films,
-    Series
+    Series,
     //SiteMain
   },
   computed: {
@@ -156,7 +110,6 @@ img {
   flex-wrap: wrap;
   .film,
   .serie {
-    padding: 1rem;
     border: 1px solid black;
     min-height: 350px;
     .title {
@@ -165,6 +118,28 @@ img {
       height: 50px;
       overflow: hidden;
     }
+    img {
+      width: 100%;
+      object-fit: cover;
+      height: 100%;
+      object-position: top;
+      height: auto;
+      height: 100%;
+    }
   }
+}
+
+.infos {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+}
+.col-2:hover .infos {
+  display: block;
 }
 </style>
