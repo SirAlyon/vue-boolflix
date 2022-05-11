@@ -28,6 +28,7 @@
           :key="'serie' + index"
           @hook:mounted="getSerieCast(serie.id)"
           :cast="serieCast[index]"
+          :genres="serieGenre"
         />
       </div>
     </div>
@@ -48,13 +49,27 @@ export default {
   },
   computed: {
     films() {
-      return state.films;
+      if (state.filmFilter !== "") {
+        return state.films.filter((film) => {
+          //console.log(film.genre_ids, state.filmFilter);
+          return film.genre_ids.includes(Number(state.filmFilter));
+        });
+      } else {
+        return state.films;
+      }
     },
     loading() {
       return state.loading;
     },
     series() {
-      return state.series;
+      if (state.serieFilter !== "") {
+        return state.series.filter((serie) => {
+          return serie.genre_ids.includes(Number(state.serieFilter));
+        });
+      } else {
+        return state.series;
+      }
+      
     },
     serieCast() {
       return state.serieCast;
@@ -62,9 +77,13 @@ export default {
     filmCast() {
       return state.filmCast;
     },
-    filmGenre(){
-      return state.filmGenre
-    }
+    filmGenre() {
+      console.log(state.filmGenre);
+      return state.filmGenre;
+    },
+    serieGenre() {
+      return state.serieGenre;
+    },
   },
   methods: {
     flags(lang) {

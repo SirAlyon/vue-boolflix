@@ -4,13 +4,14 @@
       <img :src="image" alt="" />
       <div class="infos">
         <div class="title">
-          <span class="fw-bold">Titolo:</span>  {{ serie.name }}
+          <span class="fw-bold">Titolo:</span> {{ serie.name }}
         </div>
         <div class="original_title" v-if="serie.original_name !== serie.name">
-          <span class="fw-bold">Titolo Originale:</span>  {{ serie.original_name }}
+          <span class="fw-bold">Titolo Originale:</span>
+          {{ serie.original_name }}
         </div>
         <div class="lang d-flex align-items-center">
-          <span class="fw-bold">Lingua:</span> 
+          <span class="fw-bold">Lingua:</span>
           <country-flag class="mb-1" :country="language" size="normal" />
         </div>
         <div class="star">
@@ -26,13 +27,24 @@
             />
           </span>
         </div>
-        <div class="overview" v-if="serie.overview !== '' ">
-          <span class="fw-bold">Overview:</span> 
-          {{serie.overview}}
+        <div class="overview" v-if="serie.overview !== ''">
+          <span class="fw-bold">Overview:</span>
+          {{ serie.overview }}
         </div>
-        <div class="cast" :cast="cast"> 
-          <span class="fw-bold">Actor: </span>
-          <span v-for="(actor, index) in cast" :key="index">{{actor}}, </span>
+        <div class="cast" :cast="cast">
+          <span v-for="(actor, index) in cast" :key="index">
+            <span class="fw-bold" v-if="index <= 0">Actor: </span>
+            <span> {{ actor }},</span>
+          </span>
+        </div>
+        <div class="genre" :genres="genres">
+          <span class="fw-bold">Genere:</span>
+
+          <span v-for="(genre, index) in genres" :key="index">
+            <span v-if="serie.genre_ids.includes(genre.id)">
+              {{ genre.name }},
+            </span>
+          </span>
         </div>
       </div>
     </div>
@@ -49,6 +61,7 @@ export default {
     language: String,
     vote: [Number, String],
     cast: Array,
+    genres: Array,
   },
 };
 </script>

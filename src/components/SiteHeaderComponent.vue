@@ -1,27 +1,31 @@
 <template>
   <header>
     <SiteLogo />
-    <SearchInput 
-    v-model="search"
-    @keyUp="getApiLink"
-    @keyEnter="getApi"
-    @hook:mounted="getGenre"
+    <SelectComponent
+      @changeFilm="filterFilmGenre"
+      @changeSerie="filterSerieGenre"
+      :filmGenre="filmGenre"
+      :serieGenre="serieGenre"
     />
+    <SearchInput v-model="search" @keyUp="getApiLink" @keyEnter="getApi" />
   </header>
 </template>
 
 <script>
 import axios from "axios";
 import SiteLogo from "@/components/SiteLogoComponent.vue";
+import SelectComponent from "@/components/SelectFilterComponent.vue";
+
 import SearchInput from "@/components/SearchInputComponent.vue";
 
 import state from "@/state.js";
 
 export default {
   name: "SiteHeader",
-  components:{
+  components: {
     SiteLogo,
     SearchInput,
+    SelectComponent,
   },
   data() {
     return {
@@ -29,6 +33,15 @@ export default {
       link: "",
       serieLink: "",
     };
+  },
+  computed: {
+    filmGenre() {
+      //console.log(state.filmGenre);
+      return state.filmGenre;
+    },
+    serieGenre() {
+      return state.serieGenre;
+    },
   },
   methods: {
     getApi() {
@@ -48,7 +61,6 @@ export default {
           state.loading = false;
           state.series = response.data.results;
           console.log(state.series, state.loading);
-        
 
           // per ogni serie in series
           // prendi il cast via axios
@@ -87,14 +99,40 @@ export default {
         this.getSerieLink();
       }
     },
-    getGenre(){
-      axios.get('https://api.themoviedb.org/3/genre/tv/list?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US')
-      .then((response) =>{
-        //console.log(response.data.genres);
-        state.filmGenre = response.data.genres
-        console.log(state.filmGenre);
-      })
-    }
+    getFilmGenre() {
+      axios
+        .get(
+          "https://api.themoviedb.org/3/genre/movie/list?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US"
+        )
+        .then((response) => {
+          //console.log(response.data.genres);
+          state.filmGenre = response.data.genres;
+          console.log(state.filmGenre);
+        });
+    },
+    getSerieGenre() {
+      axios
+        .get(
+          "https://api.themoviedb.org/3/genre/tv/list?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US"
+        )
+        .then((response) => {
+          //console.log(response.data.genres);
+          state.serieGenre = response.data.genres;
+          console.log(state.serieGenre);
+        });
+    },
+    filterFilmGenre(value) {
+      //console.log(value.target.value);
+      state.filmFilter = value.target.value;
+    },
+    filterSerieGenre(value) {
+      //console.log(value.target.value);
+      state.serieFilter = value.target.value;
+    },
+  },
+  mounted() {
+    this.getFilmGenre();
+    this.getSerieGenre();
   },
 };
 </script>

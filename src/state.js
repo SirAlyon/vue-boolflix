@@ -10,6 +10,11 @@ const state = Vue.observable({
     serieCast: [],
     filmCast: [],
     filmGenre: null,
+    serieGenre: null,
+    filmFilter: '',
+    serieFilter: ''
+
+
 
 })
 

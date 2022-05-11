@@ -1,10 +1,5 @@
 <template>
   <div class="d-flex align-items-center">
-    <select name="selectGenre" id="" @hook:mounted="$emit('mounted')">
-        <option value=""></option>
-        <option></option>
-        
-    </select>
     <input
       type="text"
       :value="searchText"

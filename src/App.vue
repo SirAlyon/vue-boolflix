@@ -28,6 +28,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #ffffff;
   background-color: rgb(24, 24, 24);
+  height: calc(100% - 150px);
 }
 * {
   margin: 0;
