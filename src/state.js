@@ -8,6 +8,8 @@ const state = Vue.observable({
     series: null,
     loading: true,
     serieCast: [],
+    filmCast: [],
+
 })
 
 export default state

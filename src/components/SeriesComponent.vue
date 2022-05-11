@@ -30,7 +30,7 @@
           <span class="fw-bold">Overview:</span> 
           {{serie.overview}}
         </div>
-        <div class="cast" v-if="cast !== []" :cast="cast"> 
+        <div class="cast" :cast="cast"> 
           <span class="fw-bold">Actor: </span>
           <span v-for="(actor, index) in cast" :key="index">{{actor}}, </span>
         </div>

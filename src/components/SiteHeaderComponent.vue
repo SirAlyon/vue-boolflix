@@ -1,30 +1,27 @@
 <template>
   <header>
-    <img src="@/assets/img/boolflix.png" alt="" />
-    <div class="d-flex align-items-center">
-      <input
-        type="text"
-        v-model="search"
-        @keyup="getApiLink"
-        @keyup.enter="getApi"
-      />
-
-      <font-awesome-icon
-        @click="getApi"
-        icon="fa-solid fa-magnifying-glass"
-        class="mx-2 fs-3"
-      />
-      <!-- <button @click="getApi">Submit</button> -->
-    </div>
+    <SiteLogo />
+    <SearchInput 
+    v-model="search"
+    @keyUp="getApiLink"
+    @keyEnter="getApi"
+    />
   </header>
 </template>
 
 <script>
 import axios from "axios";
+import SiteLogo from "@/components/SiteLogoComponent.vue";
+import SearchInput from "@/components/SearchInputComponent.vue";
+
 import state from "@/state.js";
 
 export default {
   name: "SiteHeader",
+  components:{
+    SiteLogo,
+    SearchInput,
+  },
   data() {
     return {
       search: "",

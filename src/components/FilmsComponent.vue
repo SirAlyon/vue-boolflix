@@ -32,6 +32,10 @@
           <span class="fw-bold">Overview:</span> 
           {{film.overview}}
         </div>
+        <div class="cast" :cast="cast"> 
+          <span class="fw-bold">Actor: </span>
+          <span v-for="(actor, index) in cast" :key="index">{{actor}}, </span>
+        </div>
       </div>
     </div>
   </div>
@@ -46,7 +50,9 @@ export default {
     image: String,
     language: String,
     vote: [Number, String],
-    
+    cast: Array,
+    index: [String, Number]
+
   },
 };
 </script>
