@@ -2,7 +2,6 @@
   <div id="app">
     <SiteHeader />
     <SiteMain />
-    
   </div>
 </template>
 
@@ -28,12 +27,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #ffffff;
   background-color: rgb(24, 24, 24);
-  height: calc(100% - 150px);
+  height: 100%
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+body{
+  background-color: rgb(24, 24, 24);
+}
 </style>

@@ -69,7 +69,6 @@ export default {
       } else {
         return state.series;
       }
-      
     },
     serieCast() {
       return state.serieCast;
@@ -106,9 +105,7 @@ export default {
     getSerieCast(id) {
       axios
         .get(
-          "https://api.themoviedb.org/3/tv/" +
-            id +
-            "/season/1/credits?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US"
+          `https://api.themoviedb.org/3/tv/${id}/season/1/credits?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US`
         )
         .then((response) => {
           //console.log(response.data.cast);
@@ -124,7 +121,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          const emptyArray = [];
+          const emptyArray = []; 
           state.serieCast.push(emptyArray);
           //console.log(state.serieCast);
         });
@@ -132,9 +129,7 @@ export default {
     getFilmCast(id) {
       axios
         .get(
-          "https://api.themoviedb.org/3/movie/" +
-            id +
-            "/credits?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US"
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US`
         )
         .then((response) => {
           //console.log(response.data.cast);
@@ -160,6 +155,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 img {
   max-width: 100%;
 }

@@ -15,9 +15,7 @@
 import axios from "axios";
 import SiteLogo from "@/components/SiteLogoComponent.vue";
 import SelectComponent from "@/components/SelectFilterComponent.vue";
-
 import SearchInput from "@/components/SearchInputComponent.vue";
-
 import state from "@/state.js";
 
 export default {
@@ -74,8 +72,7 @@ export default {
     getFilmLink() {
       if (this.search !== "") {
         return (this.link =
-          "https://api.themoviedb.org/3/search/movie?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US" +
-          "&query=" +
+          "https://api.themoviedb.org/3/search/movie?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US&query=" +
           this.search +
           "&page=1&include_adult=false");
       } else {

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-2" v-if="!loading">
+  <div class="col-2" v-if="!loading" >
     <div class="film position-relative">
       <img :src="image" alt="" />
 
@@ -43,6 +43,7 @@
           <span v-for="(genre, index) in genres" :key="index">
             <span v-if="film.genre_ids.includes(genre.id)"
               >{{ genre.name }},
+              <span v-if="!genre.name">Coming soon...</span>
             </span>
           </span>
         </div>
