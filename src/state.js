@@ -9,6 +9,7 @@ const state = Vue.observable({
     loading: true,
     serieCast: [],
     filmCast: [],
+    filmGenre: null,
 
 })
 

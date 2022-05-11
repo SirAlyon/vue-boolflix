@@ -14,7 +14,7 @@
         </div>
         <div class="lang d-flex align-items-center">
             <span class="fw-bold">Lingua:</span>
-            <country-flag class="mb-1" :country="language" size="normal" />
+            <country-flag class="mb-1 mx-1" :country="language" size="normal" />
         </div>
         <div class="star">
           <span class="voted" v-for="s in vote" :key="'star-n' + s">
@@ -51,8 +51,6 @@ export default {
     language: String,
     vote: [Number, String],
     cast: Array,
-    index: [String, Number]
-
   },
 };
 </script>

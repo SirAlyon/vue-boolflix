@@ -1,10 +1,9 @@
 <template>
   <main>
-    <div class="container" v-if="!loading">
-      <div class="row">
-        <h2>Film:</h2>
+    <div class="container-fluid" v-if="!loading && films.length > 0">
+      <div class="row films gy-4">
+        <h2 class="col-12">Film:</h2>
         <Films
-          class="films g-2"
           :film="film"
           :loading="loading"
           :image="getImage(film.poster_path)"
@@ -14,12 +13,12 @@
           :key="'film' + index"
           @hook:mounted="getFilmCast(film.id)"
           :cast="filmCast[index]"
-          
-          
+          :genres="filmGenre"
         />
-        <h2>Serie TV:</h2>
+      </div>
+      <div class="row series gy-4">
+        <h2 class="col-12">Serie TV:</h2>
         <Series
-          class="series g-2"
           :serie="serie"
           :loading="loading"
           :image="getImage(serie.poster_path)"
@@ -29,13 +28,10 @@
           :key="'serie' + index"
           @hook:mounted="getSerieCast(serie.id)"
           :cast="serieCast[index]"
-          
         />
       </div>
     </div>
-    <div class="empty" v-else>
-      So empty here...
-    </div>
+    <div class="empty" v-else>Nothing to show here...</div>
   </main>
 </template>
 
@@ -66,6 +62,9 @@ export default {
     filmCast() {
       return state.filmCast;
     },
+    filmGenre(){
+      return state.filmGenre
+    }
   },
   methods: {
     flags(lang) {
@@ -102,13 +101,13 @@ export default {
           });
           //console.log(array);
           state.serieCast.push(array);
-          console.log(state.serieCast);
+          //console.log(state.serieCast);
         })
         .catch((error) => {
           console.log(error);
           const emptyArray = [];
           state.serieCast.push(emptyArray);
-          console.log(state.serieCast);
+          //console.log(state.serieCast);
         });
     },
     getFilmCast(id) {
@@ -128,7 +127,7 @@ export default {
           });
           //console.log(array);
           state.filmCast.push(array);
-          console.log(state.filmCast);
+          //console.log(state.filmCast);
         })
         .catch((error) => {
           console.log(error);
@@ -142,16 +141,17 @@ export default {
 </script>
 
 <style lang="scss">
-h2 {
-  margin-top: 2rem !important;
-}
-
 img {
   max-width: 100%;
 }
 
 .voted {
   color: gold;
+}
+
+.container-fluid {
+  padding-right: 5rem !important;
+  padding-left: 5rem !important;
 }
 
 .films,
@@ -164,6 +164,7 @@ img {
     width: 100%;
     height: 100%;
     border-radius: 1rem;
+    animation: fadeInRight 1s;
 
     .title {
       overflow: hidden;
@@ -189,7 +190,16 @@ img {
       color: white;
       overflow-y: auto;
       scrollbar-width: thin;
+      font-size: 1.5rem;
     }
+    .infos > div {
+      margin-top: 0.5rem;
+    }
+  }
+  h2 {
+    margin-top: 4rem !important;
+    font-size: 5rem !important;
+    animation: fadeInLeft 2s;
   }
 }
 
@@ -197,11 +207,35 @@ img {
   display: block;
 }
 
-.empty{
+.empty {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 4rem;
   height: calc(100vh - 150px);
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 </style>

@@ -5,6 +5,7 @@
     v-model="search"
     @keyUp="getApiLink"
     @keyEnter="getApi"
+    @hook:mounted="getGenre"
     />
   </header>
 </template>
@@ -47,11 +48,11 @@ export default {
           state.loading = false;
           state.series = response.data.results;
           console.log(state.series, state.loading);
+        
 
           // per ogni serie in series
           // prendi il cast via axios
           // aggiungi la risposta in serie.cast
-          
         })
         .catch((error) => {
           console.log(error);
@@ -86,6 +87,14 @@ export default {
         this.getSerieLink();
       }
     },
+    getGenre(){
+      axios.get('https://api.themoviedb.org/3/genre/tv/list?api_key=3672eed0b59fb1e933fa0e484da2be73&language=en-US')
+      .then((response) =>{
+        //console.log(response.data.genres);
+        state.filmGenre = response.data.genres
+        console.log(state.filmGenre);
+      })
+    }
   },
 };
 </script>
