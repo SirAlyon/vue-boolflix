@@ -93,7 +93,8 @@ export default {
 <style scoped lang="scss">
 header {
   background-color: black;
-  padding: 2rem 5rem;
+  padding: 0 5rem;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: space-between;

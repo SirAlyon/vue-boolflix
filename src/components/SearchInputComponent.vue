@@ -11,7 +11,7 @@
     />
 
     <font-awesome-icon
-      @click="getApi"
+      @click="$emit('keyEnter')"
       icon="fa-solid fa-magnifying-glass"
       class="mx-2 fs-3"
     />

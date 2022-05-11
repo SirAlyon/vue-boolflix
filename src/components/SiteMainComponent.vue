@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="container">
+    <div class="container" v-if="!loading">
       <div class="row">
         <h2>Film:</h2>
         <Films
@@ -32,6 +32,9 @@
           
         />
       </div>
+    </div>
+    <div class="empty" v-else>
+      So empty here...
     </div>
   </main>
 </template>
@@ -192,5 +195,13 @@ img {
 
 .col-2:hover .infos {
   display: block;
+}
+
+.empty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  height: calc(100vh - 150px);
 }
 </style>
